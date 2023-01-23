@@ -1,0 +1,76 @@
+:root {
+  --color-000000: #000000;
+  --color-284A55: #284a55;
+  --color-64A7BE: #64a7be;
+  --color-FFFFFF: #ffffff;
+  --color-091014: #091014;
+  --color-193540: #193540;
+  --color-1F3B45: #1f3b45;
+  --color-FDB801: #fdb801;
+  --color-39A935: #39a935;
+  --color-F8F9FA: #f8f9fa;
+  --color-894B50: #894b50;
+  --color-EF9503: #ef9503;
+  --color-3C6C7C: #3c6c7c;
+  --color-FFC107: #ffc107;
+  --color-DC3545: #dc3545;
+}
+
+body {
+  background-color: var(--color-091014) !important;
+  font-family: 'VT323', monospace !important;
+  height: 100vh;
+  padding: 10px;
+  width: 100vw;
+}
+
+.scrollable {
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+  /* Tamaño del scroll en vertical */
+  height: 8px;
+  /* Tamaño del scroll en horizontal */
+  /* Ocultar scroll */
+  /* display: none; */
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+.scrollable::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 4px;
+}
+
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #000;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.scrollable::-webkit-scrollbar-thumb:active {
+  background-color: #000;
+}
+
+/* Ponemos un color de fondo y redondeamos las esquinas del track */
+.scrollable::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 4px;
+}
+
+/* Cambiamos el fondo cuando esté en active o hover */
+.scrollable::-webkit-scrollbar-track:hover,
+.scrollable::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+
+.main-title {
+  background-color: var(--color-284A55);
+  border-radius: 10px;
+  border: 1px solid var(--color-64A7BE);
+  color: var(--color-FFFFFF);
+  text-align: center;
+}
