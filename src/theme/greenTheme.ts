@@ -22,6 +22,15 @@ declare module '@mui/material/Button' {
   }
 }
 
+declare module '@mui/material/Chip/Chip' {
+  interface ChipPropsColorOverrides {
+    tertiary: true;
+    ready: true;
+    danger: true;
+    default: true;
+  }
+}
+
 const { palette } = createTheme();
 const { augmentColor } = palette;
 

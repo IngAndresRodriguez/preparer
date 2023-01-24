@@ -1,5 +1,6 @@
-import { Button, ButtonBase, Checkbox, Divider, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
+import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
 import { PreparerExercise } from '../../interfaces';
+import Chip from '@mui/material/Chip/Chip';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -23,22 +24,23 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
       <Item>
         <Grid container spacing={2}
           sx={{
+            marginLeft: 0,
             marginTop: 0,
             width: '100%',
-            marginLeft: 0
           }}
         >
           <Grid item xs={12} sm={12} md={9} lg={10} container
             sx={{
+              maxHeight: {xs: '100px'},
               '&.MuiGrid-item': {
+                padding: '10px',
                 paddingLeft: 0,
                 paddingTop: 0,
-                padding: '10px',
               }
             }}
           >
-            <Grid item container direction="column" spacing={2}>
-              <Grid item>
+            <Grid item container wrap="nowrap" direction="column" spacing={2}>
+              <Grid item >
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -53,7 +55,16 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
                     <Typography sx={{ fontWeight: '700' }} component='span'>{displayName && displayName.toUpperCase()} - {idScenario}</Typography>
                   }
                 />
-                <Typography sx={{ fontSize: '100%' }} >{[1, 1, 1, 1, 1, 1, 1, 1].map(_ => synopsis).join(' ')}</Typography>
+                <Typography
+                  sx={{
+                    fontSize: '100%',
+                    overflow: { xs: 'hidden', lg: 'revert' },
+                    textOverflow: { xs: 'ellipsis', lg: 'revert' },
+                    whiteSpace: { xs: 'nowrap', lg: 'revert' }
+                  }}
+                >
+                  {[1, 1, 1, 1, 1, 1, 1, 1].map(_ => synopsis).join(' ')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -79,7 +90,7 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
               }}
             >
               <Grid item>
-                <Button fullWidth variant="contained" sx={{ borderRadius: '10px', fontSize: 'smaller' }} color='ready' >{status}</Button>
+                <Chip label={status} color="ready" sx={{ borderRadius: '10px', fontSize: 'smaller', width: '100%' }} />
               </Grid>
             </Grid>
           </Grid>

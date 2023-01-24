@@ -14,13 +14,13 @@ export interface PreparerExercise {
   dataLocation: string;
   duration:     number;
   status:       string;
-  createdAt:    Date;
-  updatedAt:    Date;
+  createdAt:    string;
+  updatedAt:    string;
   pattern:      number;
   displayName:  string;
   synopsis:     string;
-  time_end:     Date;
-  time_start:   Date;
+  time_end:     string;
+  time_start:   string;
   workspaces:   Workspaces;
 }
 

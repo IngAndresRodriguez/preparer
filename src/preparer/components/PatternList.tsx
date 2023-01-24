@@ -1,5 +1,6 @@
 import { Grid, Box, Button } from '@mui/material';
-import { DataPattern } from '../../interfaces';
+import { Link } from 'react-router-dom';
+import { DataPattern, SynopsisPattern } from '../../interfaces';
 import { PatternListItem } from './PatternListItem';
 
 const dataPatterns: DataPattern[] = [
@@ -20,7 +21,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 1,
     "name": "caesium-1-1",
     "isActive": true
@@ -41,7 +42,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 2,
     "name": "caesium-1-2",
     "isActive": true
@@ -61,7 +62,7 @@ const dataPatterns: DataPattern[] = [
       12
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 3,
     "name": "caesium-1-3",
     "isActive": true
@@ -81,7 +82,7 @@ const dataPatterns: DataPattern[] = [
       14
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 4,
     "name": "caesium-1-4",
     "isActive": true
@@ -100,7 +101,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 5,
     "name": "caesium-2-1",
     "isActive": true
@@ -119,7 +120,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 6,
     "name": "caesium-2-2",
     "isActive": true
@@ -138,7 +139,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 7,
     "name": "caesium-2-3",
     "isActive": true
@@ -158,7 +159,7 @@ const dataPatterns: DataPattern[] = [
       12
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 8,
     "name": "caesium-2-4",
     "isActive": true
@@ -177,7 +178,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 10,
     "name": "caesium-3-1",
     "isActive": true
@@ -196,7 +197,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 11,
     "name": "caesium-3-2",
     "isActive": true
@@ -215,7 +216,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 12,
     "name": "caesium-3-3",
     "isActive": false
@@ -234,7 +235,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 13,
     "name": "caesium-4-1",
     "isActive": true
@@ -253,7 +254,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 14,
     "name": "caesium-4-2",
     "isActive": true
@@ -278,7 +279,7 @@ const dataPatterns: DataPattern[] = [
       14
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 15,
     "name": "test-0-0",
     "isActive": false
@@ -297,7 +298,7 @@ const dataPatterns: DataPattern[] = [
       11
     ],
     "url": "",
-    "synopsisPattern": "Descripción generica del patrón.",
+    "synopsisPattern": SynopsisPattern.DescripciónGenericaDelPatrón,
     "id": 9,
     "name": "caesium-2-5",
     "isActive": true
@@ -338,7 +339,9 @@ export const PatternList = () => {
           justifyContent: 'center'
         }}
       >
-        <Button href='/' variant='contained' color='danger'>CANCELAR</Button>
+        <Link to="/">
+          <Button variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
+        </Link>
       </Grid>
     </Box>
   )

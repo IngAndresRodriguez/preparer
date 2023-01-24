@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react";
-import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material"
+import { Link } from "react-router-dom";
+import { Box, Button, Grid, Tab, Tabs } from "@mui/material"
 import { MainTitle } from "../../ui";
 
 interface TabPanelProps {
@@ -83,7 +84,9 @@ export const PatternContent = () => {
             </Box>
           </Grid>
           <Grid container spacing={1} sx={{ padding: '.8rem', justifyContent: 'right' }}>
-            <Button href="/new/patterns" variant='contained' color='danger'>CANCELAR</Button>
+            <Link to="/new/patterns">
+              <Button fullWidth variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
+            </Link>
           </Grid>
         </Box>
       </Box>
