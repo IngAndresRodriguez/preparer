@@ -21,7 +21,7 @@ export const Modules = () => {
     <>
       <MainTitle title="MODULOS DISPONIBLES" />
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} sx={{ padding: '2rem' }}>
+        <Grid container spacing={2} sx={{ paddingY: { xs: '1rem', md: '2rem' }, paddingX: { xs: '1rem', lg: '2rem' } }}>
           <Grid item xs={12} sm={12} md={12} lg={12} >
             <ModuleList />
           </Grid>

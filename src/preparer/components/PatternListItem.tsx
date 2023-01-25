@@ -26,9 +26,9 @@ export const PatternListItem = ({ pattern }: PatternListItemProps) => {
           color="warning"
           sx={{
             display: 'inline-block',
-            fontSize: 'smaller',
+            fontSize: '11px',
             fontWeight: 800,
-            lineHeight: 2,
+            lineHeight: 1.8,
             textShadow: '0px 4px 4px rgb(0 0 0 / 25%)'
           }}
         >

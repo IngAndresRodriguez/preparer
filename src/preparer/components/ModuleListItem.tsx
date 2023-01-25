@@ -19,12 +19,11 @@ export const ModuleListItem = ({ module }: ModuleListItemProps) => {
         color={pattern && pattern.modules.includes(moduleId) ? 'warning' : 'default'}
         sx={{
           display: 'inline-block',
-          fontSize: '10px',
+          fontSize: { xs: '8px', lg: '10px' },
           fontWeight: 700,
-          lineHeight: 2,
-          // textShadow: '0px 4px 4px rgb(0 0 0 / 25%)'
+          lineHeight: 1.8,
+          textShadow: '0px 4px 4px rgb(0 0 0 / 25%)'
         }}
-      // disabled={pattern ? false : true}
       >
         {displayName}
       </Button>
