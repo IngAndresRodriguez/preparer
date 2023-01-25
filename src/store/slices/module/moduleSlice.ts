@@ -1,45 +1,44 @@
 import { SerializedError, createSlice } from "@reduxjs/toolkit"
-import { PreparerExercise } from '../../../interfaces';
-import { startLoadingExercises } from "./thunk";
-import { RootState } from "../../store";
+import { DataModule } from "../../../interfaces";
+import { startLoadingModules } from "./thunk";
 
-interface initialStateExercise {
-  exercises: PreparerExercise[];
+interface initialStateModule {
+  modules: DataModule[];
   message?: string;
   loading: 'idle' | 'pending' | 'failed',
   currentRequestId?: string,
   error: SerializedError | null,
 }
 
-const initialState: initialStateExercise = {
-  exercises: [],
+const initialState: initialStateModule = {
+  modules: [],
   loading: 'idle',
   error: null,
 }
 
-export const exerciseSlice = createSlice({
-  name: 'exercise',
+export const moduleSlice = createSlice({
+  name: 'module',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(startLoadingExercises.pending, (state, action) => {
-          state.loading = 'pending';
-          state.currentRequestId = action.meta.requestId;
+      .addCase(startLoadingModules.pending, (state, action) => {
+        state.loading = 'pending';
+        state.currentRequestId = action.meta.requestId;
       })
-      .addCase(startLoadingExercises.fulfilled, (state, action) => {
+      .addCase(startLoadingModules.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (
           state.loading === 'pending' &&
           state.currentRequestId === requestId
         ) {
           state.loading = 'idle';
-          state.exercises = action.payload?.data.preparerExercises && [...action.payload.data.preparerExercises];
+          state.modules = action.payload?.data.dataModules && [...action.payload.data.dataModules];
           state.currentRequestId = undefined;
           state.message = action.payload?.msg
         }
       })
-      .addCase(startLoadingExercises.rejected, (state, action) => {
+      .addCase(startLoadingModules.rejected, (state, action) => {
         const { requestId } = action.meta
         if (
           state.loading === 'pending' &&
@@ -52,5 +51,3 @@ export const exerciseSlice = createSlice({
       });
   },
 })
-
-export const selectLoadingRoute = (state: RootState) => state.general.loadingRoute;

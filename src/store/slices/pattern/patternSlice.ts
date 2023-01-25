@@ -1,45 +1,50 @@
 import { SerializedError, createSlice } from "@reduxjs/toolkit"
-import { PreparerExercise } from '../../../interfaces';
-import { startLoadingExercises } from "./thunk";
-import { RootState } from "../../store";
+import { DataPattern } from "../../../interfaces";
+import { startLoadingPatterns } from "./thunk";
 
-interface initialStateExercise {
-  exercises: PreparerExercise[];
+interface initialStatePattern {
+  patterns: DataPattern[];
+  pattern?: DataPattern;
   message?: string;
   loading: 'idle' | 'pending' | 'failed',
   currentRequestId?: string,
   error: SerializedError | null,
 }
 
-const initialState: initialStateExercise = {
-  exercises: [],
+const initialState: initialStatePattern = {
+  patterns: [],
   loading: 'idle',
   error: null,
 }
 
-export const exerciseSlice = createSlice({
-  name: 'exercise',
+export const patternSlice = createSlice({
+  name: 'pattern',
   initialState,
-  reducers: {},
+  reducers: {
+    setActivePattern: (state, action) => {
+      state.pattern = action.payload;
+      state.message = '';
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(startLoadingExercises.pending, (state, action) => {
-          state.loading = 'pending';
-          state.currentRequestId = action.meta.requestId;
+      .addCase(startLoadingPatterns.pending, (state, action) => {
+        state.loading = 'pending';
+        state.currentRequestId = action.meta.requestId;
       })
-      .addCase(startLoadingExercises.fulfilled, (state, action) => {
+      .addCase(startLoadingPatterns.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (
           state.loading === 'pending' &&
           state.currentRequestId === requestId
         ) {
           state.loading = 'idle';
-          state.exercises = action.payload?.data.preparerExercises && [...action.payload.data.preparerExercises];
+          state.patterns = action.payload?.data.dataPatterns && [...action.payload.data.dataPatterns];
           state.currentRequestId = undefined;
           state.message = action.payload?.msg
         }
       })
-      .addCase(startLoadingExercises.rejected, (state, action) => {
+      .addCase(startLoadingPatterns.rejected, (state, action) => {
         const { requestId } = action.meta
         if (
           state.loading === 'pending' &&
@@ -53,4 +58,4 @@ export const exerciseSlice = createSlice({
   },
 })
 
-export const selectLoadingRoute = (state: RootState) => state.general.loadingRoute;
+export const { setActivePattern } = patternSlice.actions;

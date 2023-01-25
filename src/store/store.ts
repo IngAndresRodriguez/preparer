@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { exerciseSlice, generalSlice } from './slices';
+import { exerciseSlice, generalSlice, moduleSlice, patternSlice } from './slices';
 
 export const store = configureStore({
   reducer: {
-    general: generalSlice.reducer,
     exercise: exerciseSlice.reducer,
+    general: generalSlice.reducer,
+    module: moduleSlice.reducer,
+    pattern: patternSlice.reducer,
   }
 });
 

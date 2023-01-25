@@ -1,6 +1,6 @@
-import { Grid, CircularProgress, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
-export const LoadingRoute = () => {
+export const Processing = () => {
   return (
     <Grid
       container
@@ -9,8 +9,9 @@ export const LoadingRoute = () => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        minHeight: 'calc(100vh - 21.5px)',
-        backgroundColor: 'primary.main',
+        minHeight: 'calc(100vh - 105px)',
+        backgroundColor: 'secondary.main',
+        // backgroundColor: 'white',
         padding: 4,
         borderRadius: '10px',
       }}
@@ -21,10 +22,9 @@ export const LoadingRoute = () => {
         alignItems={'center'}
       >
         <Grid item sx={{ '&.MuiGrid-item': { paddingY: '10px' } }}>
-          <Typography variant='h5'>Cargando, por favor espere...</Typography>
+          <Typography variant='h6'>Procesando, por favor espere...</Typography>
         </Grid>
         <Grid item sx={{ '&.MuiGrid-item': { paddingY: '10px' } }}>
-          <CircularProgress color='inherit' />
         </Grid>
       </Grid>
     </Grid>

@@ -1,41 +1,10 @@
-import { SyntheticEvent, useState } from "react";
+import { MouseEvent, SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Grid, Tab, Tabs } from "@mui/material"
 import { MainTitle } from "../../ui";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel({ children, value, index, ...rest }: TabPanelProps) {
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`data-tabpanel-${index}`}
-      aria-labelledby={`data-tab-${index}`}
-      {...rest}
-    >
-      {value === index && (
-        <Box
-          sx={{
-            backgroundColor: 'var(--color-3C6C7C)',
-            borderBottomLeftRadius: '10px',
-            borderBottomRightRadius: '10px',
-            color: 'white',
-            minHeight: 'calc(100vh - 250px)',
-            padding: 3,
-          }}
-        >
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
+import { PatternTabContent } from "./PatternTabContent";
+import { useAppDispatch } from "../../hooks";
+import { setActivePattern } from "../../store";
 
 const a11yProps = (index: number) => {
   return {
@@ -46,11 +15,16 @@ const a11yProps = (index: number) => {
 
 export const PatternContent = () => {
 
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
+    dispatch(setActivePattern(undefined));
+  }
 
   return (
     <>
@@ -78,13 +52,13 @@ export const PatternContent = () => {
                   <Tab sx={{ color: 'white !important' }} label="ÁREA DE TRABAJO" {...a11yProps(0)} />
                 </Tabs>
               </Box>
-              <TabPanel value={value} index={0} >
+              <PatternTabContent value={value} index={0} >
                 MAP
-              </TabPanel>
+              </PatternTabContent>
             </Box>
           </Grid>
           <Grid container spacing={1} sx={{ padding: '.8rem', justifyContent: 'right' }}>
-            <Link to="/new/patterns">
+            <Link to="/new/patterns" onClick={handleCancel}>
               <Button fullWidth variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
             </Link>
           </Grid>

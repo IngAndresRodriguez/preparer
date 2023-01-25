@@ -99,4 +99,3 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
     </Grid>
   )
 }
-

@@ -37,9 +37,7 @@ export const Exercises = () => {
             </Stack>
           </Grid>
           <Grid item xs={12} sm={12} md={10} lg={10.5} >
-            <Box sx={{ flexGrow: 1, paddingTop: { xs: 2, sm: 2, md: 0, lg: 0 } }}>
-              <ExerciseList />
-            </Box>
+            <ExerciseList />
           </Grid>
         </Grid>
       </Box>
