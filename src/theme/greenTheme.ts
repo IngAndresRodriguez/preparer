@@ -38,6 +38,13 @@ const createColor = (mainColor: string) => augmentColor({ color: { main: mainCol
 
 // A custom theme for this app
 export const greenTheme: Theme = createTheme({
+  // typography: {
+  //   fontFamily: [
+  //     'VT323',
+  //     'Arial',
+  //     'sans-serif',
+  //   ].join(','),
+  // },
   palette: {
     primary: {
       main: '#1F3B45',

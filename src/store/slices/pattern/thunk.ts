@@ -1,10 +1,13 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { PatternResponse } from "../../../interfaces";
-import { preparerAPI } from "../../../apis";
+import { getPatterns } from "../../../apis";
+import { AppThunk } from "../../store";
+import { getPatternsFailure, getPatternsStart, getPatternsSuccess } from "./patternSlice";
 
-export const startLoadingPatterns = createAsyncThunk(
-  'pattern/startLoadingPatterns',
-  async () => {
-    const { data } = await preparerAPI.get<PatternResponse>('/pattern');
-    return data;
-  });
+export const startLoadingPatterns = (): AppThunk => async (dispatch) => {
+  try {
+    dispatch(getPatternsStart());
+    const patterns = await getPatterns();
+    dispatch(getPatternsSuccess(patterns));
+  } catch (err: any) {
+    dispatch(getPatternsFailure(err.toString()));
+  }
+}

@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid } from '@mui/material'
 import { DataPattern } from '../../interfaces'
-import { useAppDispatch } from '../../hooks';
-import { setActivePattern } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setActivePattern, startUpdateExercise } from '../../store';
 
 interface PatternListItemProps {
   pattern: DataPattern
@@ -11,15 +11,29 @@ interface PatternListItemProps {
 
 export const PatternListItem = ({ pattern }: PatternListItemProps) => {
 
+  const { exercise } = useAppSelector(state => state.exercise);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleActivePattern = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handleActivePattern = async (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    await dispatch(startUpdateExercise({ idScenario: 'SC0003', exercise: { pattern: pattern.id.toString() } }));
+    
+    if (!exercise) {
+      return;
+    }
+
     dispatch(setActivePattern({ ...pattern }));
+
+    navigate('/new/pattern', { replace: true });
+
   }
 
   return (
     <Grid item xs={12} md={6} lg={3}>
-      <Link to={`/new/patterns/${pattern.name}`} onClick={handleActivePattern}>
+      <Link to={`/new/pattern`} onClick={handleActivePattern}>
         <Button
           fullWidth
           variant="contained"

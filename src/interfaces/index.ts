@@ -1,3 +1,4 @@
-export * from './Exercise';
-export * from './Module';
-export * from './Pattern';
+export * from './exercise';
+export * from './generals';
+export * from './module';
+export * from './pattern';

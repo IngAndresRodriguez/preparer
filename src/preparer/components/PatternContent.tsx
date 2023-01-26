@@ -23,7 +23,9 @@ export const PatternContent = () => {
   };
 
   const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
-    dispatch(setActivePattern(undefined));
+    event.preventDefault();
+
+    // dispatch(setActivePattern(undefined));
   }
 
   return (
@@ -58,7 +60,7 @@ export const PatternContent = () => {
             </Box>
           </Grid>
           <Grid container spacing={1} sx={{ padding: '.8rem', justifyContent: 'right' }}>
-            <Link to="/new/patterns" onClick={handleCancel}>
+            <Link to="/new" onClick={handleCancel}>
               <Button fullWidth variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
             </Link>
           </Grid>

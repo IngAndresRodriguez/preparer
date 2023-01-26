@@ -1,27 +1,28 @@
-export interface ExerciseResponse {
+export interface ExerciseResponse<T> {
   msg:  string;
-  data: DataExercise;
+  data: T;
 }
 
-export interface DataExercise {
-  preparerExercises: PreparerExercise[];
+export interface DataExercise<T> {
+  [key: string]: T;
 }
 
 export interface PreparerExercise {
-  _id:          string;
-  idScenario:   string;
-  scenario:     number;
-  dataLocation: string;
-  duration:     number;
-  status:       string;
-  createdAt:    string;
-  updatedAt:    string;
-  pattern:      number;
-  displayName:  string;
-  synopsis:     string;
-  time_end:     string;
-  time_start:   string;
-  workspaces:   Workspaces;
+  _id?:          string;
+  idScenario?:   string;
+  scenario?:     number;
+  dataLocation?: string;
+  duration?:     number;
+  status?:       string;
+  createdAt?:    string;
+  updatedAt?:    string;
+  pattern?:      string;
+  displayName?:  string;
+  synopsis?:     string;
+  time_end?:     string;
+  time_start?:   string;
+  workspaces?:   Workspaces;
+  patternId?:    number;
 }
 
 export interface Workspaces {
@@ -42,4 +43,34 @@ export interface Geometry {
 
 export interface Properties {
   name: string;
+}
+
+export interface DataResult {
+  result:    string;
+}
+
+export interface DataCreateExercise extends DataResult {
+  location:  Location;
+  objectIds: ObjectIDS;
+}
+
+export interface Location {
+  dataLocation: string;
+  idScenario:   string;
+}
+
+export interface ObjectIDS {
+  "CIS":   Security;
+  "USS-A": Security;
+  "USS-B": Security;
+}
+
+export interface Security {
+  user_id:  string;
+  token_id: string;
+}
+
+export interface DataUpdateExercise {
+  idScenario: string;
+  exercise: PreparerExercise;
 }

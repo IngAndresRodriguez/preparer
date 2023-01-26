@@ -1,10 +1,13 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
+import logger from 'redux-logger'
+import thunk from 'redux-thunk';
 import { exerciseSlice, generalSlice, moduleSlice, patternSlice } from './slices';
 
 const persistConfig = {
   key: "root",
+  version: 1,
   storage,
 };
 
@@ -19,12 +22,14 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  // middleware: [...getDefaultMiddleware(), thunk]
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    })
+    .concat(logger),
 });
 
 export const persistor = persistStore(store);

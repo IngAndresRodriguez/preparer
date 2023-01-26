@@ -8,6 +8,7 @@ import App from './App';
 import { persistor, store } from './store';
 
 import 'sweetalert2/dist/sweetalert2.css'
+import 'animate.css';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

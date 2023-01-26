@@ -1,10 +1,13 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ModuleResponse } from "../../../interfaces";
-import { preparerAPI } from "../../../apis";
+import { getModules } from "../../../apis";
+import { AppThunk } from "../../store";
+import { getModulesFailure, getModulesStart, getModulesSuccess } from "./moduleSlice";
 
-export const startLoadingModules = createAsyncThunk(
-  'module/startLoadingModules',
-  async () => {
-    const { data } = await preparerAPI.get<ModuleResponse>('/module');
-    return data;
-  });
+export const startLoadingModules = (): AppThunk => async (dispatch) => {
+  try {
+    dispatch(getModulesStart());
+    const modules = await getModules();
+    dispatch(getModulesSuccess(modules));
+  } catch (err: any) {
+    dispatch(getModulesFailure(err.toString()));
+  }
+}

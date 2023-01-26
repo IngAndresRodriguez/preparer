@@ -63,7 +63,7 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
                     whiteSpace: { xs: 'nowrap', lg: 'revert' }
                   }}
                 >
-                  {[1, 1, 1, 1, 1, 1, 1, 1].map(_ => synopsis).join(' ')}
+                  {synopsis}
                 </Typography>
               </Grid>
             </Grid>

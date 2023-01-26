@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface initialStateGeneral {
+interface GeneralState {
   loadingRoute: boolean;
 }
 
-const initialState: initialStateGeneral = {
+const initialState: GeneralState = {
   loadingRoute: true,
 }
 

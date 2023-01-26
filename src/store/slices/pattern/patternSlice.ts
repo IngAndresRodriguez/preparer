@@ -1,61 +1,56 @@
-import { SerializedError, createSlice } from "@reduxjs/toolkit"
-import { DataPattern } from "../../../interfaces";
-import { startLoadingPatterns } from "./thunk";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { DataPattern, PatternResponse } from "../../../interfaces";
+import { Base } from "../interfaces";
 
-interface initialStatePattern {
+interface PatternState extends Base {
   patterns: DataPattern[];
   pattern?: DataPattern;
-  message?: string;
-  loading: 'idle' | 'pending' | 'failed',
-  currentRequestId?: string,
-  error: SerializedError | null,
 }
 
-const initialState: initialStatePattern = {
+const initialState: PatternState = {
   patterns: [],
   loading: 'idle',
   error: null,
+}
+
+const startLoading = (state: PatternState) => {
+  state.loading = 'pending'
+}
+
+const loadingFailed = (state: PatternState, action: PayloadAction<string>) => {
+  state.loading = 'idle'
+  state.error = action.payload
 }
 
 export const patternSlice = createSlice({
   name: 'pattern',
   initialState,
   reducers: {
+    getPatternStart: startLoading,
+    getPatternsStart: startLoading,
+    getPatternsSuccess(state, { payload }: PayloadAction<PatternResponse>) {
+      const { data: { dataPatterns }, msg } = payload
+      state.loading = 'idle';
+      state.patterns = dataPatterns && [...dataPatterns];
+      state.message = msg;
+      state.error = null;
+    },
+    getPatternFailure: loadingFailed,
+    getPatternsFailure: loadingFailed,
     setActivePattern: (state, action) => {
       state.pattern = action.payload;
       state.message = '';
     },
+    reset: () => initialState,
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(startLoadingPatterns.pending, (state, action) => {
-        state.loading = 'pending';
-        state.currentRequestId = action.meta.requestId;
-      })
-      .addCase(startLoadingPatterns.fulfilled, (state, action) => {
-        const { requestId } = action.meta;
-        if (
-          state.loading === 'pending' &&
-          state.currentRequestId === requestId
-        ) {
-          state.loading = 'idle';
-          state.patterns = action.payload?.data.dataPatterns && [...action.payload.data.dataPatterns];
-          state.currentRequestId = undefined;
-          state.message = action.payload?.msg
-        }
-      })
-      .addCase(startLoadingPatterns.rejected, (state, action) => {
-        const { requestId } = action.meta
-        if (
-          state.loading === 'pending' &&
-          state.currentRequestId === requestId
-        ) {
-          state.loading = 'idle'
-          state.error = action.error
-          state.currentRequestId = undefined
-        }
-      });
-  },
+  extraReducers: (builder) => { },
 })
 
-export const { setActivePattern } = patternSlice.actions;
+export const {
+  getPatternStart,
+  getPatternsStart,
+  getPatternsSuccess,
+  getPatternFailure,
+  getPatternsFailure,
+  setActivePattern
+} = patternSlice.actions;

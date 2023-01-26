@@ -1,53 +1,56 @@
-import { SerializedError, createSlice } from "@reduxjs/toolkit"
-import { DataModule } from "../../../interfaces";
-import { startLoadingModules } from "./thunk";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { DataModule, ModuleResponse } from "../../../interfaces";
+import { Base } from "../interfaces";
 
-interface initialStateModule {
+interface ModuleState extends Base {
   modules: DataModule[];
-  message?: string;
-  loading: 'idle' | 'pending' | 'failed',
-  currentRequestId?: string,
-  error: SerializedError | null,
+  module?: DataModule
 }
 
-const initialState: initialStateModule = {
+const initialState: ModuleState = {
   modules: [],
   loading: 'idle',
   error: null,
 }
 
+const startLoading = (state: ModuleState) => {
+  state.loading = 'pending'
+}
+
+const loadingFailed = (state: ModuleState, action: PayloadAction<string>) => {
+  state.loading = 'idle'
+  state.error = action.payload
+}
+
 export const moduleSlice = createSlice({
   name: 'module',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(startLoadingModules.pending, (state, action) => {
-        state.loading = 'pending';
-        state.currentRequestId = action.meta.requestId;
-      })
-      .addCase(startLoadingModules.fulfilled, (state, action) => {
-        const { requestId } = action.meta;
-        if (
-          state.loading === 'pending' &&
-          state.currentRequestId === requestId
-        ) {
-          state.loading = 'idle';
-          state.modules = action.payload?.data.dataModules && [...action.payload.data.dataModules];
-          state.currentRequestId = undefined;
-          state.message = action.payload?.msg
-        }
-      })
-      .addCase(startLoadingModules.rejected, (state, action) => {
-        const { requestId } = action.meta
-        if (
-          state.loading === 'pending' &&
-          state.currentRequestId === requestId
-        ) {
-          state.loading = 'idle'
-          state.error = action.error
-          state.currentRequestId = undefined
-        }
-      });
+  reducers: {
+    getModuleStart: startLoading,
+    getModulesStart: startLoading,
+    getModulesSuccess(state, { payload }: PayloadAction<ModuleResponse>) {
+      const { data: { dataModules }, msg } = payload
+      state.loading = 'idle';
+      state.modules = dataModules && [...dataModules];
+      state.message = msg;
+      state.error = null;
+    },
+    getModuleFailure: loadingFailed,
+    getModulesFailure: loadingFailed,
+    setActiveModule: (state, action) => {
+      state.module = action.payload;
+      state.message = '';
+    },
+    reset: () => initialState,
   },
+  extraReducers: (builder) => { },
 })
+
+export const {
+  getModuleStart,
+  getModulesStart,
+  getModulesSuccess,
+  getModuleFailure,
+  getModulesFailure,
+  setActiveModule
+} = moduleSlice.actions;

@@ -16,7 +16,14 @@ export const ModuleList = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1, minHeight: 'calc(100vh - 90px)', paddingTop: { xs: 2, sm: 2, md: 0, lg: 0 } }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        minHeight: 'calc(100vh - 90px)',
+        paddingTop: { xs: 2, sm: 2, md: 0, lg: 0 }
+      }}
+      className="animate__animated animate__fadeIn animate__faster"
+    >
       <Grid
         container
         spacing={1}

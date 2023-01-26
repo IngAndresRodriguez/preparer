@@ -1,2 +1,2 @@
-export { preparerAPI } from './preparerApi';
+export * from './preparerApi';
 export * from './counterApi';
