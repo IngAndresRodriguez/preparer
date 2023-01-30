@@ -33,7 +33,6 @@ export const startCreateExercise = (prefixs: PREFIXS[]): AppThunk => async (disp
     if (result === 'OK') {
       dispatch(setActiveScenario(location.idScenario));
       dispatch(setLoadingRoute(false));
-      return;
     }
   } catch (err: any) {
     const { response: { data: { msg } } } = err;
@@ -50,7 +49,6 @@ export const startUpdateExercise = (dataExercise: DataUpdateExercise): AppThunk 
       const exercise = await getExercise(dataExercise.idScenario);
       dispatch(getExerciseSuccess(exercise));
       dispatch(setLoadingRoute(false));
-      return;
     }
   } catch (err: any) {
     const { response: { data: { msg } } } = err;

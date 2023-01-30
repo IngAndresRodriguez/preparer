@@ -1,10 +1,12 @@
+import { Box } from '@mui/material';
 
 interface MainTitleProps {
-  title: string;
+  children?: JSX.Element | JSX.Element[];
+  title?: string;
 }
 
-export const MainTitle = ({ title }: MainTitleProps) => {
+export const MainTitle = ({ title, children }: MainTitleProps) => {
   return (
-    <div className='main-title'>{title}</div>
+    <Box className='main-title'>{children ? children : title}</Box>
   )
 }

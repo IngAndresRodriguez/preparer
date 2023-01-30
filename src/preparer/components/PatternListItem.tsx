@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid } from '@mui/material'
 import { DataPattern } from '../../interfaces'
@@ -11,20 +11,18 @@ interface PatternListItemProps {
 
 export const PatternListItem = ({ pattern }: PatternListItemProps) => {
 
-  const { exercise } = useAppSelector(state => state.exercise);
+  const { scenario } = useAppSelector(state => state.exercise);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleActivePattern = async (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    event.stopPropagation();
 
-    await dispatch(startUpdateExercise({ idScenario: 'SC0003', exercise: { pattern: pattern.id.toString() } }));
-    
-    if (!exercise) {
+    if (!scenario) {
       return;
     }
 
+    await dispatch(startUpdateExercise({ idScenario: scenario, exercise: { pattern: pattern.id.toString() } }));
     dispatch(setActivePattern({ ...pattern }));
 
     navigate('/new/pattern', { replace: true });

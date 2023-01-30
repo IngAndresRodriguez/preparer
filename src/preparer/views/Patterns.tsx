@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MainTitle } from '../../ui';
 import { PatternList } from '../';
 import { useAppDispatch } from '../../hooks';
-import { resetExercise, startLoadingPatterns } from '../../store';
+import { resetExercise, resetGeneral, resetPattern, resetModule, startLoadingPatterns } from '../../store';
 
 export const Patterns = () => {
 
@@ -19,6 +19,9 @@ export const Patterns = () => {
     event.preventDefault();
 
     dispatch(resetExercise());
+    dispatch(resetPattern());
+    dispatch(resetModule());
+    dispatch(resetGeneral());
 
     navigate('/', { replace: true });
   }

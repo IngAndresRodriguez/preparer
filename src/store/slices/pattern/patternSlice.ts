@@ -41,7 +41,7 @@ export const patternSlice = createSlice({
       state.pattern = action.payload;
       state.message = '';
     },
-    reset: () => initialState,
+    resetPattern: () => initialState,
   },
   extraReducers: (builder) => { },
 })
@@ -52,5 +52,6 @@ export const {
   getPatternsSuccess,
   getPatternFailure,
   getPatternsFailure,
-  setActivePattern
+  setActivePattern,
+  resetPattern
 } = patternSlice.actions;

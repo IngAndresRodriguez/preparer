@@ -5,7 +5,7 @@ interface GeneralState {
 }
 
 const initialState: GeneralState = {
-  loadingRoute: true,
+  loadingRoute: false,
 }
 
 export const generalSlice = createSlice({
@@ -14,9 +14,13 @@ export const generalSlice = createSlice({
   reducers: {
     setLoadingRoute: (state, action) => {
       state.loadingRoute = action.payload;
-    }
+    },
+    resetGeneral: () => initialState
   },
   extraReducers: (builder) => { },
 });
 
-export const { setLoadingRoute } = generalSlice.actions;
+export const {
+  setLoadingRoute,
+  resetGeneral
+} = generalSlice.actions;

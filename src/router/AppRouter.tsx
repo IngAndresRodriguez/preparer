@@ -14,7 +14,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path='/' element={<PreparerLayout />} >
-        <Route index element={<HomePage />} />
+        <Route index element={<HomePage />}  />
         <Route path="/new" element={<Patterns />} />
         <Route path="/new/pattern" element={<PatternContent />} />
         <Route path="*" element={<NoMatch />} />

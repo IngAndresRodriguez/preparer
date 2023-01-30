@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import { persistor, store } from './store';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'sweetalert2/dist/sweetalert2.css'
 import 'animate.css';
 import './index.css';

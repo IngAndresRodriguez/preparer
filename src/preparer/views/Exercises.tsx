@@ -1,11 +1,12 @@
 import { MouseEvent, useEffect } from "react";
-import { Link, useLinkClickHandler, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Grid, Stack } from "@mui/material"
 import { MainTitle } from "../../ui"
 import { ExerciseList } from "../components"
 import { startLoadingExercises, startCreateExercise } from "../../store"
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { PREFIXS } from "../../interfaces";
+import { Toast } from "../../utils";
 
 export const Exercises = () => {
 
@@ -19,25 +20,20 @@ export const Exercises = () => {
 
   const handleCreateExercise = async (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-
     await dispatch(startCreateExercise([PREFIXS.CIS]));
-
-    if (!scenario) {
-      return;
-    }
-
-    navigate('/new', { replace: true });
-
   }
 
   const handleEditExercise = async (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+  }
 
-    if (event.isDefaultPrevented()) {
-      event.defaultPrevented = false;
+  useEffect(() => {
+
+    if (scenario) {
+      navigate('/new', { replace: true });
     }
 
-  }
+  }, [scenario])
 
   useEffect(() => {
     handleLoadingExercises();

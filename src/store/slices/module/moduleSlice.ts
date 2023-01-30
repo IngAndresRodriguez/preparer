@@ -41,7 +41,7 @@ export const moduleSlice = createSlice({
       state.module = action.payload;
       state.message = '';
     },
-    reset: () => initialState,
+    resetModule: () => initialState,
   },
   extraReducers: (builder) => { },
 })
@@ -52,5 +52,6 @@ export const {
   getModulesSuccess,
   getModuleFailure,
   getModulesFailure,
-  setActiveModule
+  setActiveModule,
+  resetModule
 } = moduleSlice.actions;

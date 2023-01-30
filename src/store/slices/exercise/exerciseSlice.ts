@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { DataExercise, ExerciseResponse, PreparerExercise } from '../../../interfaces';
 import { Base } from "../interfaces";
+
 interface ExerciseState extends Base {
   exercises: PreparerExercise[];
   exercise?: PreparerExercise;
@@ -39,7 +40,12 @@ export const exerciseSlice = createSlice({
       const { data: { preparerExercise }, msg } = payload;
       state.loading = 'idle';
       state.exercise = preparerExercise && { ...preparerExercise };
-      state.exercises = preparerExercise && [...state.exercises, { ...preparerExercise }];
+      const exists = state.exercises.some(exercise => exercise._id === preparerExercise._id);
+      !exists
+        ? state.exercises.push(preparerExercise)
+        : (
+          state.exercises = state.exercises.map(exercises => (exercises._id === preparerExercise._id) ? preparerExercise : exercises)
+        );
       state.message = msg;
       state.error = null;
     },
