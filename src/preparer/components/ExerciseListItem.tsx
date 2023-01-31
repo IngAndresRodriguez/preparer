@@ -1,6 +1,7 @@
 import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
 import { PreparerExercise } from '../../interfaces';
 import Chip from '@mui/material/Chip/Chip';
+import { validateStates } from '../../helpers';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -17,7 +18,7 @@ interface ExerciseListItemProps {
 
 export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
 
-  const { synopsis, displayName, idScenario, status } = exercise;
+  const { synopsis, displayName, idScenario, status } = exercise; 
 
   return (
     <Grid item xs={12} sx={{ paddingRight: '1em' }}>
@@ -31,7 +32,7 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
         >
           <Grid item xs={12} sm={12} md={9} lg={10} container
             sx={{
-              maxHeight: {xs: '100px'},
+              maxHeight: { xs: '100px' },
               '&.MuiGrid-item': {
                 padding: '10px',
                 paddingLeft: 0,

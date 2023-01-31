@@ -2,6 +2,7 @@ import { Grid, Box } from '@mui/material';
 import { useAppSelector } from "../../hooks";
 import { Empty, Processing } from "../../ui";
 import { ModuleListItem } from "./ModuleListItem";
+import { sortingFunction } from '../../helpers';
 
 export const ModuleList = () => {
 
@@ -14,6 +15,8 @@ export const ModuleList = () => {
   if (modules.length === 0) {
     return (<Empty title='No hay modulos disponibles' />);
   }
+
+  const sortedModules = sortingFunction([...modules], 'order');
 
   return (
     <Box
@@ -39,7 +42,7 @@ export const ModuleList = () => {
         }}
       >
         {
-          modules.map(module => (
+          sortedModules.map(module => (
             <ModuleListItem key={module._id} module={module} />
           ))
         }

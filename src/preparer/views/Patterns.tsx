@@ -3,11 +3,12 @@ import { Box, Grid, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { MainTitle } from '../../ui';
 import { PatternList } from '../';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { resetExercise, resetGeneral, resetPattern, resetModule, startLoadingPatterns } from '../../store';
 
 export const Patterns = () => {
 
+  const { scenario } = useAppSelector(state => state.exercise);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ export const Patterns = () => {
   const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
+    localStorage.removeItem('lastView');
     dispatch(resetExercise());
     dispatch(resetPattern());
     dispatch(resetModule());
@@ -27,7 +29,13 @@ export const Patterns = () => {
   }
 
   useEffect(() => {
+
+    if(!scenario){
+      return navigate('/', { replace: true });
+    }
+
     handleLoadingPatterns();
+    
   }, [])
 
   return (

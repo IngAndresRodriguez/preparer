@@ -9,3 +9,11 @@ export enum PREFIXS {
   SIM_UAS = "SIM_UAS",
   EXT = 'SIM-EXT'
 }
+
+export enum STATES {
+  READY = 'LISTO',
+  ONGOING = 'EN EJECUCIÓN',
+  EDITING = 'EN EDICIÓN',
+  EXECUTED = 'EJECUTADO',
+  CREATED = 'CREADO',
+}

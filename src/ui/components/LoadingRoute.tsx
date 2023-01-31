@@ -15,11 +15,7 @@ export const LoadingRoute = () => {
         borderRadius: '10px',
       }}
     >
-      <Grid
-        container
-        direction='column'
-        alignItems={'center'}
-      >
+      <Grid container direction='column' alignItems={'center'}>
         <Grid item sx={{ '&.MuiGrid-item': { paddingY: '10px' } }}>
           <Typography variant='h5'>Cargando, por favor espere...</Typography>
         </Grid>

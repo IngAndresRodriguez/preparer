@@ -1,3 +1,5 @@
+import { STATES } from "./generals";
+
 export interface ExerciseResponse<T> {
   msg:  string;
   data: T;
@@ -13,7 +15,7 @@ export interface PreparerExercise {
   scenario?:     number;
   dataLocation?: string;
   duration?:     number;
-  status?:       string;
+  status?:       STATES;
   createdAt?:    string;
   updatedAt?:    string;
   pattern?:      string;

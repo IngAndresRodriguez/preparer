@@ -5,7 +5,7 @@ import { useCheckExercises } from "../hooks";
 
 export const AppRouter = () => {
 
-  const loadingRoute = useCheckExercises();
+  const { loadingRoute } = useCheckExercises();
 
   if (loadingRoute) {
     return <LoadingRoute />
@@ -14,7 +14,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path='/' element={<PreparerLayout />} >
-        <Route index element={<HomePage />}  />
+        <Route index element={<HomePage />} />
         <Route path="/new" element={<Patterns />} />
         <Route path="/new/pattern" element={<PatternContent />} />
         <Route path="*" element={<NoMatch />} />

@@ -74,3 +74,22 @@ body {
   color: var(--color-FFFFFF);
   text-align: center;
 }
+
+/* .nav-link {
+  color: white !important;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background-color: var(--color-3C6C7C) !important;
+  border-color: transparent !important;
+  color: white !important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  border-color: transparent !important;
+}
+
+.dropdown {
+  position: static !important;
+} */
