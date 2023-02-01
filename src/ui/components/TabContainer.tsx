@@ -1,15 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ReactNode, useState } from 'react';
 import { Tab } from 'react-bootstrap';
-import { NavTab } from '..';
 import { TABS } from '../../interfaces';
 
 interface TabContainerProps {
   children: ReactNode;
-  handleTabChange: (event: any) => void;
 }
 
-export const TabContainer = ({ children, handleTabChange, ...rest }: TabContainerProps) => {
+export const TabContainer = ({ children, ...rest }: TabContainerProps) => {
 
   const [lastTab, setLastTab] = useState<string>(localStorage.getItem('lastTab') || TABS.TAB_GENERAL);
 
@@ -20,7 +18,6 @@ export const TabContainer = ({ children, handleTabChange, ...rest }: TabContaine
       onSelect={(event: any) => {
         localStorage.setItem('lastTab', event);
         setLastTab(event);
-        handleTabChange(event);
       }}
     >
       {children}

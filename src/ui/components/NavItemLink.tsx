@@ -1,11 +1,14 @@
 import { Nav } from "react-bootstrap"
+import { DataModule } from "../../interfaces";
 
 interface NavItemLinkProps {
   title: string;
   eventKey: string;
+  module?: DataModule
+  handleTabChange: (module?: DataModule) => void;
 }
 
-export const NavItemLink = ({ title, eventKey, ...rest }: NavItemLinkProps) => {
+export const NavItemLink = ({ title, eventKey, module, handleTabChange, ...rest }: NavItemLinkProps) => {
   return (
     <Nav.Item>
       <Nav.Link
@@ -17,6 +20,7 @@ export const NavItemLink = ({ title, eventKey, ...rest }: NavItemLinkProps) => {
           color: 'white',
         }}
         className={[].join(' ')}
+        onClick={() => handleTabChange(module)}
       >
         {title}
       </Nav.Link>

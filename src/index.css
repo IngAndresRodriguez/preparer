@@ -94,7 +94,7 @@ body {
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-  border-color: transparent !important;
+  border-color: rgba(25, 53, 64, .5) !important;
 }
 
 .dropdown {
