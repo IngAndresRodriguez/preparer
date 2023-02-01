@@ -41,7 +41,6 @@ body {
 /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
 .scrollable::-webkit-scrollbar-thumb {
   background: #000;
-  border-radius: 4px;
 }
 
 /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
@@ -58,7 +57,6 @@ body {
 /* Ponemos un color de fondo y redondeamos las esquinas del track */
 .scrollable::-webkit-scrollbar-track {
   background: #e1e1e1;
-  border-radius: 4px;
 }
 
 /* Cambiamos el fondo cuando esté en active o hover */
@@ -75,8 +73,17 @@ body {
   text-align: center;
 }
 
-/* .nav-link {
+.nav-link {
+  font-size: .780rem !important;
   color: white !important;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: var(--color-284A55);
 }
 
 .nav-tabs .nav-item.show .nav-link,
@@ -92,4 +99,4 @@ body {
 
 .dropdown {
   position: static !important;
-} */
+}

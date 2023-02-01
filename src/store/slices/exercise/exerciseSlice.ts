@@ -41,11 +41,11 @@ export const exerciseSlice = createSlice({
       state.loading = 'idle';
       state.exercise = preparerExercise && { ...preparerExercise };
       const exists = state.exercises.some(exercise => exercise._id === preparerExercise._id);
-      !exists
-        ? state.exercises.push(preparerExercise)
-        : (
-          state.exercises = state.exercises.map(exercises => (exercises._id === preparerExercise._id) ? preparerExercise : exercises)
-        );
+      if (!exists) {
+        state.exercises.push(preparerExercise);
+      } else {
+        state.exercises = state.exercises.map(exercises => (exercises._id === preparerExercise._id) ? preparerExercise : exercises)
+      }
       state.message = msg;
       state.error = null;
     },

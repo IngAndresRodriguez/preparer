@@ -4,11 +4,13 @@ import { Base } from "../interfaces";
 
 interface ModuleState extends Base {
   modules: DataModule[];
-  module?: DataModule
+  module?: DataModule;
+  activeModules: DataModule[];
 }
 
 const initialState: ModuleState = {
   modules: [],
+  activeModules: [],
   loading: 'idle',
   error: null,
 }
@@ -37,8 +39,19 @@ export const moduleSlice = createSlice({
     },
     getModuleFailure: loadingFailed,
     getModulesFailure: loadingFailed,
-    setActiveModule: (state, action) => {
-      state.module = action.payload;
+    setActiveModule: (state, { payload }: PayloadAction<DataModule | undefined>) => {
+      state.module = payload;
+      state.message = '';
+    },
+    setActiveModules: (state, { payload }: PayloadAction<DataModule>) => {
+      const exists = state.activeModules.some(module => module._id === payload._id);
+      if (!exists) {
+        state.activeModules.push(payload);
+        state.module = payload;
+      } else {
+        state.activeModules = state.activeModules.filter(module => module._id !== payload._id)
+        state.module = undefined;
+      }
       state.message = '';
     },
     resetModule: () => initialState,
@@ -53,5 +66,6 @@ export const {
   getModuleFailure,
   getModulesFailure,
   setActiveModule,
+  setActiveModules,
   resetModule
 } = moduleSlice.actions;

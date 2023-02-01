@@ -17,3 +17,7 @@ export enum STATES {
   EXECUTED = 'EJECUTADO',
   CREATED = 'CREADO',
 }
+
+export enum TABS {
+  TAB_GENERAL = 'general'
+}
