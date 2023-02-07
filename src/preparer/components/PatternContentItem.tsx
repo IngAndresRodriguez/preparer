@@ -3,7 +3,7 @@ import { NavItemDropdown, NavItemDropdownItem, NavItemLink } from '../../ui';
 
 interface PatternContentItemProps {
   module: DataModule
-  handleTabChange: (module?: DataModule) => void;
+  handleTabChange: <T>(data?: T) => void;
 }
 
 export const PatternContentItem = ({ module, handleTabChange, ...rest }: PatternContentItemProps) => {
@@ -19,8 +19,8 @@ export const PatternContentItem = ({ module, handleTabChange, ...rest }: Pattern
             <NavItemDropdownItem
               key={_id}
               title={title}
+              data={module}
               eventKey={`tab-${_id}`}
-              module={module}
               handleTabChange={handleTabChange}
             />
           ))
@@ -33,8 +33,8 @@ export const PatternContentItem = ({ module, handleTabChange, ...rest }: Pattern
     <NavItemLink
       title={displayName}
       eventKey={`tab-${_id}`}
-      module={module}
-      handleTabChange={handleTabChange}
-    />
+      data={module}
+      className={''}
+      handleTabChange={handleTabChange} />
   )
 }

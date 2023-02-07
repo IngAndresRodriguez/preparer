@@ -11,7 +11,7 @@ export const NavTab = ({ children }: NavTabProps) => {
       variant="tabs"
       style={{
         borderBottom: 'none',
-        minHeight: 'min-content',
+        minHeight: '35px',
         minWidth: 'max-content'
       }}>
       {children}

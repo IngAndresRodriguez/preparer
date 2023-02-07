@@ -11,7 +11,7 @@ export const PatternContent = () => {
 
   const { scenario, exercise } = useAppSelector(state => state.exercise);
   const { pattern } = useAppSelector(state => state.pattern);
-  const { activeModules } = useAppSelector(state => state.module);
+  const { module, activeModules } = useAppSelector(state => state.module);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export const PatternContent = () => {
     dispatch(setActivePattern(undefined));
   }
 
-  const handleTabChange = (module?: DataModule) => {
+  const handleTabChange = (module?: DataModule): void => {
     dispatch(setActiveModule(module));
   }
 
@@ -42,17 +42,30 @@ export const PatternContent = () => {
         <Box sx={{ bgcolor: 'tertiary.main', borderRadius: '10px', padding: '.2rem' }}>
           <Grid container spacing={0} sx={{ paddingX: '.8rem', paddingTop: '.8rem' }}>
             <Box sx={{ borderRadius: '10px', minHeight: 'calc(100vh - 180px)', width: '100%', }}>
-              <TabContainer >
-                <Box className={['scrollable'].join(' ')} sx={{ overflowX: 'auto', overflowY: 'hidden' }}>
-                  <NavTab>
-                    <NavItemLink title="ÁREA_DE_TRABAJO" eventKey={TABS.TAB_GENERAL} handleTabChange={handleTabChange} />
-                    {
-                      activeModules.map((module) => (
-                        <PatternContentItem key={module._id} module={module} handleTabChange={handleTabChange} />
-                      ))
-                    }
-                  </NavTab>
-                </Box>
+              <TabContainer initialValues={{ activeTab: TABS.TAB_GENERAL }}>
+                {
+                  (args) => (
+                    <Box className={['scrollable'].join(' ')} sx={{ overflowX: 'auto', overflowY: 'hidden' }}>
+                      <NavTab>
+                        <NavItemLink
+                          className={[!module && 'active'].join(' ')}
+                          title="ÁREA_DE_TRABAJO"
+                          eventKey={TABS.TAB_GENERAL}
+                          handleTabChange={handleTabChange}
+                        />
+                        {
+                          activeModules.map((module) => (
+                            <PatternContentItem
+                              key={module._id}
+                              module={module}
+                              handleTabChange={handleTabChange}
+                            />
+                          ))
+                        }
+                      </NavTab>
+                    </Box>
+                  )
+                }
               </TabContainer>
             </Box>
           </Grid>
