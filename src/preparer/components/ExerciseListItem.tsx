@@ -1,7 +1,7 @@
+import { ChangeEvent } from 'react';
 import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
-import { PreparerExercise } from '../../interfaces';
 import Chip from '@mui/material/Chip/Chip';
-import { validateStates } from '../../helpers';
+import { PreparerExercise } from '../../interfaces';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -13,12 +13,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 interface ExerciseListItemProps {
-  exercise: PreparerExercise
+  exercise: PreparerExercise;
+  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => void;
 }
 
-export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
+export const ExerciseListItem = ({ exercise, handleChange }: ExerciseListItemProps) => {
 
-  const { synopsis, displayName, idScenario, status } = exercise; 
+  const { synopsis, displayName, idScenario, status } = exercise;
 
   return (
     <Grid item xs={12} sx={{ paddingRight: '1em' }}>
@@ -45,15 +46,23 @@ export const ExerciseListItem = ({ exercise }: ExerciseListItemProps) => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      defaultChecked sx={{
+                      defaultChecked
+                      sx={{
                         color: 'inherit',
                         '&.Mui-checked': {
                           color: 'inherit'
                         }
                       }}
-                    />}
+                      onChange={(event: ChangeEvent<HTMLInputElement>, checked: boolean) => handleChange(event, checked, exercise)}
+                    />
+                  }
                   label={
-                    <Typography sx={{ fontWeight: '700' }} component='span'>{displayName && displayName.toUpperCase()} - {idScenario}</Typography>
+                    <Typography
+                      sx={{ fontWeight: '700' }}
+                      component='span'
+                    >
+                      {displayName && displayName.toUpperCase()} - {idScenario}
+                    </Typography>
                   }
                 />
                 <Typography

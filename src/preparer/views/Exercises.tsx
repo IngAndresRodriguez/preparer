@@ -1,11 +1,11 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useEffect, ChangeEvent } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Grid, Stack } from "@mui/material"
 import { MainTitle } from "../../ui"
 import { ExerciseList } from "../components"
 import { startLoadingExercises, startCreateExercise } from "../../store"
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { PREFIXS } from "../../interfaces";
+import { PREFIXS, PreparerExercise } from "../../interfaces";
 import { Toast } from "../../utils";
 
 export const Exercises = () => {
@@ -25,6 +25,10 @@ export const Exercises = () => {
 
   const handleEditExercise = async (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+  }
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => {
+
   }
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export const Exercises = () => {
             </Stack>
           </Grid>
           <Grid item xs={12} sm={12} md={10} lg={10.5} >
-            <ExerciseList />
+            <ExerciseList handleChange={handleChange} />
           </Grid>
         </Grid>
       </Box>

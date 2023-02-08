@@ -1,9 +1,15 @@
+import { ChangeEvent } from 'react';
 import { Grid, Box } from '@mui/material';
 import { ExerciseListItem } from './ExerciseListItem';
 import { useAppSelector } from '../../hooks/useStore';
 import { Empty, Processing } from '../../ui';
+import { PreparerExercise } from '../../interfaces';
 
-export const ExerciseList = () => {
+interface ExerciseListProps {
+  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => void;
+}
+
+export const ExerciseList = ({ handleChange }: ExerciseListProps) => {
 
   const { loading, exercises } = useAppSelector(state => state.exercise);
 
@@ -40,7 +46,7 @@ export const ExerciseList = () => {
       >
         {
           exercises.map(exercise => (
-            <ExerciseListItem key={exercise._id} exercise={exercise} />
+            <ExerciseListItem key={exercise._id} exercise={exercise} handleChange={handleChange} />
           ))
         }
       </Grid>
