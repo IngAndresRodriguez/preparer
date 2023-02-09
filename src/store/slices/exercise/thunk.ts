@@ -2,7 +2,7 @@ import { createExercise, getExercise, getExercises, updateExercise } from "../..
 import { DataUpdateExercise, PREFIXS } from "../../../interfaces";
 import { AppThunk } from "../../store";
 import { setLoadingRoute } from "../general";
-import { getExerciseSuccess, getExercisesFailure, getExercisesStart, getExercisesSuccess, setActiveScenario } from "./exerciseSlice";
+import { getExerciseSuccess, getExercisesFailure, getExercisesStart, getExercisesSuccess, setActiveScenario, setErrorMessage } from "./exerciseSlice";
 
 export const startLoadingExercises = (): AppThunk => async (dispatch) => {
   try {
@@ -30,14 +30,17 @@ export const startCreateExercise = (prefixs: PREFIXS[]): AppThunk => async (disp
   try {
     dispatch(setLoadingRoute(true));
     const { data: { result, location }, msg } = await createExercise(prefixs);
+    dispatch(setLoadingRoute(false));
     if (result === 'OK') {
       dispatch(setActiveScenario(location.idScenario));
-      dispatch(setLoadingRoute(false));
     }
   } catch (err: any) {
     const { response: { data: { msg } } } = err;
     dispatch(setLoadingRoute(false));
     dispatch(getExercisesFailure(msg ? msg : 'Ha ocurrido un error.'));
+    setTimeout(() => {
+      dispatch(setErrorMessage());
+    }, 10);
   }
 }
 

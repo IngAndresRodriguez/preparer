@@ -34,7 +34,6 @@ export const exerciseSlice = createSlice({
       state.loading = 'idle';
       state.exercises = preparerExercises && [...preparerExercises];
       state.message = msg;
-      state.error = null;
     },
     getExerciseSuccess(state, { payload }: PayloadAction<ExerciseResponse<DataExercise<PreparerExercise>>>) {
       const { data: { preparerExercise }, msg } = payload;
@@ -56,6 +55,9 @@ export const exerciseSlice = createSlice({
       state.scenario = payload;
       state.error = null;
     },
+    setErrorMessage: (state) => {
+      state.error = null;
+    },
     resetExercise: () => initialState
   },
   extraReducers: (builder) => { },
@@ -69,5 +71,6 @@ export const {
   getExercisesFailure,
   getExerciseFailure,
   setActiveScenario,
+  setErrorMessage,
   resetExercise
 } = exerciseSlice.actions;
