@@ -5,6 +5,7 @@ import { MainTitle } from '../../ui';
 import { PatternList } from '../';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { resetExercise, resetGeneral, resetPattern, resetModule, startLoadingPatterns } from '../../store';
+import { Toast } from "../../utils";
 
 export const Patterns = () => {
 
@@ -30,12 +31,12 @@ export const Patterns = () => {
 
   useEffect(() => {
 
-    if(!scenario){
+    if (!scenario) {
       return navigate('/', { replace: true });
     }
 
     handleLoadingPatterns();
-    
+
   }, [])
 
   return (
