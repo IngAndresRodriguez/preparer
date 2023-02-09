@@ -46,7 +46,7 @@ export const ExerciseListItem = ({ exercise, handleChange }: ExerciseListItemPro
                 <FormControlLabel
                   control={
                     <Checkbox
-                      defaultChecked
+                      value={false}
                       sx={{
                         color: 'inherit',
                         '&.Mui-checked': {
