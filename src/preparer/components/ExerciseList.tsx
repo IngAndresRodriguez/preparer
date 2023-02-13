@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, MouseEvent } from 'react';
 import { Grid, Box } from '@mui/material';
 import { ExerciseListItem } from './ExerciseListItem';
 import { useAppSelector } from '../../hooks/useStore';
@@ -7,9 +7,10 @@ import { PreparerExercise } from '../../interfaces';
 
 interface ExerciseListProps {
   handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => void;
+  handleCreateExercise: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const ExerciseList = ({ handleChange }: ExerciseListProps) => {
+export const ExerciseList = ({ handleChange, handleCreateExercise }: ExerciseListProps) => {
 
   const { loading, exercises } = useAppSelector(state => state.exercise);
 
@@ -18,7 +19,7 @@ export const ExerciseList = ({ handleChange }: ExerciseListProps) => {
   }
 
   if (exercises.length === 0) {
-    return (<Empty showButton title='No hay ejercicios preparados' />);
+    return (<Empty title='No hay ejercicios preparados' showButton onClick={handleCreateExercise} />);
   }
 
   return (
@@ -46,7 +47,7 @@ export const ExerciseList = ({ handleChange }: ExerciseListProps) => {
       >
         {
           exercises.map(exercise => (
-            <ExerciseListItem key={exercise._id} exercise={exercise} handleChange={handleChange} />
+            exercise.displayName && (<ExerciseListItem key={exercise._id} exercise={exercise} handleChange={handleChange} />)
           ))
         }
       </Grid>
