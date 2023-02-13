@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { MainTitle, NavItemLink, NavTab, TabContainer } from "../../ui";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setActiveModule, setActivePattern } from "../../store";
+import { setActiveModule, setActiveModules, setActivePattern } from "../../store";
 import { PatternContentItem } from "./PatternContentItem";
 import { DataModule, TABS } from "../../interfaces";
 
@@ -16,8 +16,13 @@ export const PatternContent = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     dispatch(setActivePattern(undefined));
+    dispatch(setActiveModules(undefined));
+
+    navigate('/new', { replace: true });
   }
 
   const handleTabChange = (module?: DataModule): void => {
@@ -70,9 +75,7 @@ export const PatternContent = () => {
             </Box>
           </Grid>
           <Grid container spacing={0} sx={{ padding: '.8rem', justifyContent: 'right' }}>
-            <Link to="/new" onClick={handleCancel}>
-              <Button fullWidth variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
-            </Link>
+            <Button onClick={handleCancel} variant="contained" color='danger' sx={{ display: 'inline-block' }}>CANCELAR</Button>
           </Grid>
         </Box>
       </Box>
