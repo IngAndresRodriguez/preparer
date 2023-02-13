@@ -1,4 +1,4 @@
 export { ExerciseList } from "./ExerciseList";
 export { ModuleList } from "./ModuleList";
-export { PatternContent } from "./PatternContent";
+export { ContentItem } from "./ContentItem";
 export { PatternList } from "./PatternList";

@@ -1,12 +1,12 @@
 import { Module } from '../../interfaces'
 import { NavItemDropdown, NavItemDropdownItem, NavItemLink } from '../../ui';
 
-interface PatternContentItemProps {
+interface ContentItemProps {
   module: Module
   handleTabChange: <T>(data?: T) => void;
 }
 
-export const PatternContentItem = ({ module, handleTabChange, ...rest }: PatternContentItemProps) => {
+export const ContentItem = ({ module, handleTabChange, ...rest }: ContentItemProps) => {
 
   const { _id, tabs } = module;
   const { displayName, tabsPatterns } = tabs;

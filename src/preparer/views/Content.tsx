@@ -1,13 +1,13 @@
-import { MouseEvent, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, Grid, Typography } from '@mui/material';
-import { MainTitle, NavItemLink, NavTab, TabContainer } from "../../ui";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setActiveModule, setActiveModules, setActivePattern, startLoadingPatterns } from "../../store";
-import { PatternContentItem } from "./PatternContentItem";
-import { Module, TABS } from "../../interfaces";
+import React, { useEffect, MouseEvent } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Grid, Button } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setActiveModule, setActiveModules, setActivePattern, startLoadingPatterns } from '../../store';
+import { Module, TABS } from '../../interfaces';
+import { MainTitle, NavItemLink, NavTab, TabContainer } from '../../ui';
+import { ContentItem } from '../components';
 
-export const PatternContent = () => {
+export const Content = () => {
 
   const { scenario, exercise } = useAppSelector(state => state.exercise);
   const { patternId, pattern } = useAppSelector(state => state.pattern);
@@ -49,7 +49,6 @@ export const PatternContent = () => {
 
   }, [patternId])
 
-
   return (
     <>
       <MainTitle>
@@ -73,7 +72,7 @@ export const PatternContent = () => {
                         />
                         {
                           activeModules.map((module) => (
-                            <PatternContentItem
+                            <ContentItem
                               key={module._id}
                               module={module}
                               handleTabChange={handleTabChange}

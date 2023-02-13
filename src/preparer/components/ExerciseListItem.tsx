@@ -3,6 +3,11 @@ import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mu
 import Chip from '@mui/material/Chip/Chip';
 import { Exercise } from '../../interfaces';
 
+interface ExerciseListItemProps {
+  exercise: Exercise;
+  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: Exercise) => void;
+}
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   backgroundColor: theme.palette.secondary.main,
@@ -11,11 +16,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
   padding: theme.spacing(2),
 }));
-
-interface ExerciseListItemProps {
-  exercise: Exercise;
-  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: Exercise) => void;
-}
 
 export const ExerciseListItem = ({ exercise, handleChange }: ExerciseListItemProps) => {
 
