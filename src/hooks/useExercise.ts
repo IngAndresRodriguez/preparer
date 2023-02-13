@@ -26,6 +26,10 @@ export const useExercise = () => {
   const handleCreateExercise = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
+    if (selectedExercises.length !== 0) {
+      return;
+    }
+
     await dispatch(startCreateExercise([PREFIXS.CIS]));
     navigate('/new', { replace: true });
 
@@ -33,6 +37,10 @@ export const useExercise = () => {
 
   const handleEditExercise = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    if (selectedExercises.length > 1) {
+      return;
+    }
 
     const [dtScenario] = selectedExercises;
 
