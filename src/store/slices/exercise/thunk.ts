@@ -2,6 +2,7 @@ import { createExercise, getExercise, getExercises, updateExercise } from "../..
 import { DataUpdateExercise, PREFIXS } from "../../../interfaces";
 import { AppThunk } from "../../store";
 import { setLoadingRoute } from "../general";
+import { setActivePattern } from "../pattern";
 import { getExerciseSuccess, getExercisesFailure, getExercisesStart, getExercisesSuccess, setActiveScenario, setErrorMessage } from "./exerciseSlice";
 
 export const startLoadingExercises = (): AppThunk => async (dispatch) => {
@@ -44,13 +45,16 @@ export const startCreateExercise = (prefixs: PREFIXS[]): AppThunk => async (disp
   }
 }
 
-export const startEditExercise = (idScenario: string): AppThunk => async (dispatch) => {
+export const startEditExercise = (idScenario: string): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(setLoadingRoute(true));
     const exercise = await getExercise(idScenario);
     const { data: { preparerExercise }, msg } = exercise;
     dispatch(setLoadingRoute(false));
     if (Object.keys(preparerExercise).length) {
+      const { patterns } = getState().pattern;
+      const pattern = patterns.find(pattern => pattern.id === preparerExercise.patternId);
+      dispatch(setActivePattern(pattern));
       dispatch(getExerciseSuccess(exercise));
     }
   } catch (err: any) {

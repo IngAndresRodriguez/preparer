@@ -52,8 +52,9 @@ export const patternSlice = createSlice({
     },
     getPatternFailure: loadingFailed,
     getPatternsFailure: loadingFailed,
-    setActivePattern: (state, action) => {
-      state.pattern = action.payload;
+    setActivePattern: (state, { payload }: PayloadAction<Pattern | undefined>) => {
+      state.patternId = payload?.id;
+      state.pattern = payload;
       state.message = '';
     },
     resetPattern: () => initialState,

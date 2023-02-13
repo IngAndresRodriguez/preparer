@@ -13,9 +13,7 @@ export const Patterns = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleLoadingPatterns = async () => {
-    dispatch(startLoadingPatterns());
-  }
+  
 
   const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -34,9 +32,7 @@ export const Patterns = () => {
     if (!scenario) {
       return navigate('/', { replace: true });
     }
-
-    handleLoadingPatterns();
-
+    
   }, [])
 
   return (

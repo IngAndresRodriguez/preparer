@@ -7,16 +7,6 @@ import { startLoadingModules } from '../../store';
 
 export const Modules = () => {
 
-  const dispatch = useAppDispatch();
-
-  const handleLoadingExercises = async () => {
-    dispatch(startLoadingModules());
-  }
-
-  useEffect(() => {
-    handleLoadingExercises();
-  }, [])
-
   return (
     <>
       <MainTitle title="MODULOS DISPONIBLES" />

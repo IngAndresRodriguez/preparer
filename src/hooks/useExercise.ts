@@ -1,12 +1,10 @@
-import { useState, MouseEvent, ChangeEvent, useEffect } from 'react';
+import { useState, MouseEvent, ChangeEvent, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './';
 import { PREFIXS, Exercise } from '../interfaces';
-import { startCreateExercise, startEditExercise, startLoadingExercises } from '../store';
+import { startCreateExercise, startEditExercise, startLoadingExercises, startLoadingModules, startLoadingPatterns } from '../store';
 
 export const useExercise = () => {
-
-  const { scenario } = useAppSelector(state => state.exercise);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -15,6 +13,14 @@ export const useExercise = () => {
 
   const handleLoadingExercises = () => {
     dispatch(startLoadingExercises());
+  }
+
+  const handleLoadingPatterns = async () => {
+    dispatch(startLoadingPatterns());
+  }
+
+  const handleLoadingModules = async () => {
+    dispatch(startLoadingModules());
   }
 
   const handleCreateExercise = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -28,11 +34,17 @@ export const useExercise = () => {
   const handleEditExercise = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    if (!scenario) {
+    const [dtScenario] = selectedExercises;
+
+    if (!Object.keys(dtScenario).length) {
       return;
     }
 
-    await dispatch(startEditExercise(scenario));
+    if (!dtScenario.idScenario) {
+      return;
+    }
+
+    await dispatch(startEditExercise(dtScenario.idScenario));
     navigate('/new/pattern', { replace: true });
   }
 
@@ -40,7 +52,7 @@ export const useExercise = () => {
     event.preventDefault();
   }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean, { idScenario, dataLocation }: Exercise) => {
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>, checked: boolean, { idScenario, dataLocation }: Exercise) => {
 
     setSelectedExercises((prev: Exercise[]) => {
 
@@ -56,10 +68,12 @@ export const useExercise = () => {
 
     });
 
-  }
+  }, [selectedExercises])
 
   useEffect(() => {
     handleLoadingExercises();
+    handleLoadingPatterns();
+    handleLoadingModules();
   }, [])
 
   return {

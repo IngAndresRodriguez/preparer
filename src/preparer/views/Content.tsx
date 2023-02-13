@@ -16,10 +16,6 @@ export const Content = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleLoadingPatterns = async () => {
-    dispatch(startLoadingPatterns());
-  }
-
   const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -55,7 +51,7 @@ export const Content = () => {
         <Typography component={'span'} variant="body2">EJERCICIO - </Typography>
         <Typography component={'span'} variant="body2" sx={{ textTransform: 'uppercase', fontWeight: '700' }}> {scenario} - {pattern?.displayName} </Typography>
       </MainTitle>
-      <Box sx={{ flexGrow: 1, padding: '2rem', width: '100%', }}>
+      <Box sx={{ flexGrow: 1, padding: '2rem', width: '100%' }} className="animate__animated animate__fadeIn animate__faster">
         <Box sx={{ bgcolor: 'tertiary.main', borderRadius: '10px', padding: '.2rem' }}>
           <Grid container spacing={0} sx={{ paddingX: '.8rem', paddingTop: '.8rem' }}>
             <Box sx={{ borderRadius: '10px', minHeight: 'calc(100vh - 180px)', width: '100%', }}>
