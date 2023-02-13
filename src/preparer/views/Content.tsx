@@ -54,7 +54,16 @@ export const Content = () => {
       <Box sx={{ flexGrow: 1, padding: '2rem', width: '100%' }} className="animate__animated animate__fadeIn animate__faster">
         <Box sx={{ bgcolor: 'tertiary.main', borderRadius: '10px', padding: '.2rem' }}>
           <Grid container spacing={0} sx={{ paddingX: '.8rem', paddingTop: '.8rem' }}>
-            <Box sx={{ borderRadius: '10px', minHeight: 'calc(100vh - 180px)', width: '100%', }}>
+            <Box sx={{
+              borderRadius: '10px',
+              minHeight: {
+                xs: 'calc(100vh - 379px)',
+                sm: 'calc(100vh - 379px)',
+                md: 'calc(100vh - 295px)',
+                lg: 'calc(100vh - 295px)',
+              },
+              width: '100%',
+            }}>
               <TabContainer initialValues={{ activeTab: TABS.TAB_GENERAL }}>
                 {
                   (args) => (

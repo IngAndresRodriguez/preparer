@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MainTitle } from '../../ui';
 import { PatternList } from '../';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { resetExercise, resetGeneral, resetPattern, resetModule, startLoadingPatterns } from '../../store';
+import { resetExercise, resetGeneral, resetPattern, resetModule } from '../../store';
 import { Toast } from "../../utils";
 
 export const Patterns = () => {
@@ -12,8 +12,6 @@ export const Patterns = () => {
   const { scenario } = useAppSelector(state => state.exercise);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  
 
   const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -32,7 +30,7 @@ export const Patterns = () => {
     if (!scenario) {
       return navigate('/', { replace: true });
     }
-    
+
   }, [])
 
   return (
@@ -49,7 +47,12 @@ export const Patterns = () => {
                 flexGrow: 1,
                 flexWrap: 'wrap',
                 justifyContent: 'center',
-                minHeight: 'calc(100vh - 100px)',
+                minHeight: {
+                  xs: 'calc(100vh - 387px)',
+                  sm: 'calc(100vh - 387px)',
+                  md: 'calc(100vh - 213px)',
+                  lg: 'calc(100vh - 213px)',
+                },
               }}
             >
               <PatternList />

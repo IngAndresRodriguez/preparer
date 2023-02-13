@@ -38,7 +38,7 @@ export const TabContainer = ({ children, onChange, className, style, value, init
             borderBottomLeftRadius: '10px',
             borderBottomRightRadius: '10px',
             color: 'white',
-            minHeight: 'calc(100vh - 220px)',
+            minHeight: 'calc(100vh - 335px)',
           }}
         >
           <Tab.Pane eventKey={lastTab} title="Home" style={{ padding: '1rem' }}>

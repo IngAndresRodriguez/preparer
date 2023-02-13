@@ -13,12 +13,12 @@ const CustomBox = styled(Box)(({ theme }) => ({
   borderRadius: '10px',
   display: 'flex',
   flexDirection: 'column',
-  height: 'calc(100vh - 22.5px)',
+  minHeight: 'calc(100vh - 135px)',
 }));
 
-export const Main = ({ sx, children }: MainProps) => {
+export const Main = ({ sx, children, ...rest }: MainProps) => {
   return (
-    <Grid item sx={{ ...sx }}>
+    <Grid item sx={{ ...sx }} {...rest}>
       <CustomBox>
         {children}
       </CustomBox>

@@ -9,7 +9,12 @@ export const Processing = () => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        minHeight: 'calc(100vh - 105px)',
+        minHeight: {
+          xs: 'calc(100vh - 404px)',
+          sm: 'calc(100vh - 404px)',
+          md: 'calc(100vh - 230px)',
+          lg: 'calc(100vh - 230px)',
+        },
         backgroundColor: 'secondary.main',
         // backgroundColor: 'white',
         padding: 4,

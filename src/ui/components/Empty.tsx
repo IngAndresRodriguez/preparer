@@ -17,7 +17,12 @@ export const Empty = ({ title, showButton = false, onClick }: EmptyProps) => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        minHeight: 'calc(100vh - 100px)',
+        minHeight: {
+          xs: 'calc(100vh - 404px)',
+          sm: 'calc(100vh - 404px)',
+          md: 'calc(100vh - 230px)',
+          lg: 'calc(100vh - 230px)',
+        },
         backgroundColor: 'secondary.main',
         // border: (theme) => `1px solid ${theme.palette.tertiary.main}`,
         padding: 4,

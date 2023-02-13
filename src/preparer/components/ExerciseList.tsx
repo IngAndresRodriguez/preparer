@@ -26,7 +26,12 @@ export const ExerciseList = ({ handleChange, handleCreateExercise }: ExerciseLis
     <Box
       sx={{
         flexGrow: 1,
-        minHeight: 'calc(100vh - 90px)',
+        minHeight: {
+          xs: 'calc(100vh - 379px)',
+          sm: 'calc(100vh - 379px)',
+          md: 'calc(100vh - 205px)',
+          lg: 'calc(100vh - 205px)',
+        },
         paddingTop: { xs: 2, sm: 2, md: 0, lg: 0 }
       }}
       className="animate__animated animate__fadeIn animate__faster"
