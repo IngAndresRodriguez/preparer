@@ -3,18 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { MainTitle, NavItemLink, NavTab, TabContainer } from "../../ui";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setActiveModule, setActiveModules, setActivePattern } from "../../store";
+import { setActiveModule, setActiveModules, setActivePattern, startLoadingPatterns } from "../../store";
 import { PatternContentItem } from "./PatternContentItem";
-import { DataModule, TABS } from "../../interfaces";
+import { Module, TABS } from "../../interfaces";
 
 export const PatternContent = () => {
 
   const { scenario, exercise } = useAppSelector(state => state.exercise);
-  const { pattern } = useAppSelector(state => state.pattern);
+  const { patternId, pattern } = useAppSelector(state => state.pattern);
   const { module, activeModules } = useAppSelector(state => state.module);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleLoadingPatterns = async () => {
+    dispatch(startLoadingPatterns());
+  }
 
   const handleCancel = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -25,7 +29,7 @@ export const PatternContent = () => {
     navigate('/new', { replace: true });
   }
 
-  const handleTabChange = (module?: DataModule): void => {
+  const handleTabChange = (module?: Module): void => {
     dispatch(setActiveModule(module));
   }
 
@@ -36,6 +40,15 @@ export const PatternContent = () => {
     }
 
   }, [exercise])
+
+  useEffect(() => {
+
+    if (!patternId) {
+      navigate('/new', { replace: true });
+    }
+
+  }, [patternId])
+
 
   return (
     <>

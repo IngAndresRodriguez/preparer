@@ -1,11 +1,11 @@
 import { MouseEvent } from "react";
 import { Button, Grid } from "@mui/material"
-import { DataModule } from "../../interfaces"
+import { Module } from "../../interfaces"
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveModules } from "../../store";
 
 interface ModuleListItemProps {
-  module: DataModule
+  module: Module
 }
 
 export const ModuleListItem = ({ module }: ModuleListItemProps) => {

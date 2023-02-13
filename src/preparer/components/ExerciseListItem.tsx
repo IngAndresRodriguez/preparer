@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
 import Chip from '@mui/material/Chip/Chip';
-import { PreparerExercise } from '../../interfaces';
+import { Exercise } from '../../interfaces';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -13,8 +13,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 interface ExerciseListItemProps {
-  exercise: PreparerExercise;
-  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => void;
+  exercise: Exercise;
+  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: Exercise) => void;
 }
 
 export const ExerciseListItem = ({ exercise, handleChange }: ExerciseListItemProps) => {

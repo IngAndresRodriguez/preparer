@@ -1,10 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { DataPattern, PatternResponse } from "../../../interfaces";
+import { Pattern, DataPatterns, PatternResponse } from "../../../interfaces";
 import { Base } from "../interfaces";
 
 interface PatternState extends Base {
-  patterns: DataPattern[];
-  pattern?: DataPattern;
+  patterns: Pattern[];
+  patternId?: number;
+  pattern?: Pattern;
 }
 
 const initialState: PatternState = {
@@ -28,10 +29,24 @@ export const patternSlice = createSlice({
   reducers: {
     getPatternStart: startLoading,
     getPatternsStart: startLoading,
-    getPatternsSuccess(state, { payload }: PayloadAction<PatternResponse>) {
+    getPatternsSuccess(state, { payload }: PayloadAction<PatternResponse<DataPatterns<Pattern[]>>>) {
       const { data: { dataPatterns }, msg } = payload
       state.loading = 'idle';
       state.patterns = dataPatterns && [...dataPatterns];
+      state.message = msg;
+      state.error = null;
+    },
+    getPatternSuccess(state, { payload }: PayloadAction<PatternResponse<DataPatterns<Pattern>>>) {
+      const { data: { dataPatterns }, msg } = payload;
+      state.loading = 'idle';
+      state.pattern = dataPatterns && { ...dataPatterns };
+      state.patternId = dataPatterns.id;
+      const exists = state.patterns.some(pattern => pattern._id === dataPatterns._id);
+      if (!exists) {
+        state.patterns.push(dataPatterns);
+      } else {
+        state.patterns = state.patterns.map(pattern => (pattern._id === dataPatterns._id) ? dataPatterns : pattern)
+      }
       state.message = msg;
       state.error = null;
     },

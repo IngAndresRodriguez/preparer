@@ -1,8 +1,8 @@
-import { DataModule } from '../../interfaces'
+import { Module } from '../../interfaces'
 import { NavItemDropdown, NavItemDropdownItem, NavItemLink } from '../../ui';
 
 interface PatternContentItemProps {
-  module: DataModule
+  module: Module
   handleTabChange: <T>(data?: T) => void;
 }
 

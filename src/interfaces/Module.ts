@@ -1,13 +1,13 @@
-export interface ModuleResponse {
+export interface ModuleResponse<T> {
   msg:  string;
-  data: DataModules;
+  data: T;
 }
 
-export interface DataModules {
-  dataModules: DataModule[];
+export interface DataModules<T> {
+  [key: string]: T;
 }
 
-export interface DataModule {
+export interface Module {
   tabs:          Tabs;
   _id:           string;
   moduleId:      number;

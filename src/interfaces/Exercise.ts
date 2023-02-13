@@ -9,7 +9,7 @@ export interface DataExercise<T> {
   [key: string]: T;
 }
 
-export interface PreparerExercise {
+export interface Exercise {
   _id?:          string;
   idScenario?:   string;
   scenario?:     number;
@@ -74,5 +74,5 @@ export interface Security {
 
 export interface DataUpdateExercise {
   idScenario: string;
-  exercise: PreparerExercise;
+  exercise: Exercise;
 }

@@ -1,13 +1,13 @@
-export interface PatternResponse {
+export interface PatternResponse<T> {
   msg:  string;
-  data: DataPatterns;
+  data: T;
 }
 
-export interface DataPatterns {
-  dataPatterns: DataPattern[];
+export interface DataPatterns<T> {
+  [key: string]: T;
 }
 
-export interface DataPattern {
+export interface Pattern {
   _id:             string;
   displayName:     string;
   modules:         number[];

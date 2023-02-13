@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { DataExercise, ExerciseResponse, PreparerExercise } from '../../../interfaces';
+import { DataExercise, ExerciseResponse, Exercise } from '../../../interfaces';
 import { Base } from "../interfaces";
 
 interface ExerciseState extends Base {
-  exercises: PreparerExercise[];
-  exercise?: PreparerExercise;
+  exercises: Exercise[];
+  exercise?: Exercise;
   scenario?: string;
 }
 
@@ -29,16 +29,17 @@ export const exerciseSlice = createSlice({
   reducers: {
     getExerciseStart: startLoading,
     getExercisesStart: startLoading,
-    getExercisesSuccess(state, { payload }: PayloadAction<ExerciseResponse<DataExercise<PreparerExercise[]>>>) {
+    getExercisesSuccess(state, { payload }: PayloadAction<ExerciseResponse<DataExercise<Exercise[]>>>) {
       const { data: { preparerExercises }, msg } = payload;
       state.loading = 'idle';
       state.exercises = preparerExercises && [...preparerExercises];
       state.message = msg;
     },
-    getExerciseSuccess(state, { payload }: PayloadAction<ExerciseResponse<DataExercise<PreparerExercise>>>) {
+    getExerciseSuccess(state, { payload }: PayloadAction<ExerciseResponse<DataExercise<Exercise>>>) {
       const { data: { preparerExercise }, msg } = payload;
       state.loading = 'idle';
       state.exercise = preparerExercise && { ...preparerExercise };
+      state.scenario = preparerExercise.idScenario;
       const exists = state.exercises.some(exercise => exercise._id === preparerExercise._id);
       if (!exists) {
         state.exercises.push(preparerExercise);

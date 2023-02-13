@@ -3,10 +3,10 @@ import { Grid, Box } from '@mui/material';
 import { ExerciseListItem } from './ExerciseListItem';
 import { useAppSelector } from '../../hooks/useStore';
 import { Empty, Processing } from '../../ui';
-import { PreparerExercise } from '../../interfaces';
+import { Exercise } from '../../interfaces';
 
 interface ExerciseListProps {
-  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: PreparerExercise) => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean, exercise: Exercise) => void;
   handleCreateExercise: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 

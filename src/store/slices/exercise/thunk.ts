@@ -44,6 +44,25 @@ export const startCreateExercise = (prefixs: PREFIXS[]): AppThunk => async (disp
   }
 }
 
+export const startEditExercise = (idScenario: string): AppThunk => async (dispatch) => {
+  try {
+    dispatch(setLoadingRoute(true));
+    const exercise = await getExercise(idScenario);
+    const { data: { preparerExercise }, msg } = exercise;
+    dispatch(setLoadingRoute(false));
+    if (Object.keys(preparerExercise).length) {
+      dispatch(getExerciseSuccess(exercise));
+    }
+  } catch (err: any) {
+    const { response: { data: { msg } } } = err;
+    dispatch(setLoadingRoute(false));
+    dispatch(getExercisesFailure(msg ? msg : 'Ha ocurrido un error.'));
+    setTimeout(() => {
+      dispatch(setErrorMessage());
+    }, 10);
+  }
+}
+
 export const startUpdateExercise = (dataExercise: DataUpdateExercise): AppThunk => async (dispatch) => {
   try {
     dispatch(setLoadingRoute(true));

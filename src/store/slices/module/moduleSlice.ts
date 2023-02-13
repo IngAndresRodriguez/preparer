@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { DataModule, ModuleResponse } from "../../../interfaces";
+import { DataModules, Module, ModuleResponse } from "../../../interfaces";
 import { Base } from "../interfaces";
 
 interface ModuleState extends Base {
-  modules: DataModule[];
-  module?: DataModule;
-  activeModules: DataModule[];
+  modules: Module[];
+  module?: Module;
+  activeModules: Module[];
 }
 
 const initialState: ModuleState = {
@@ -30,7 +30,7 @@ export const moduleSlice = createSlice({
   reducers: {
     getModuleStart: startLoading,
     getModulesStart: startLoading,
-    getModulesSuccess(state, { payload }: PayloadAction<ModuleResponse>) {
+    getModulesSuccess(state, { payload }: PayloadAction<ModuleResponse<DataModules<Module[]>>>) {
       const { data: { dataModules }, msg } = payload
       state.loading = 'idle';
       state.modules = dataModules && [...dataModules];
@@ -39,11 +39,11 @@ export const moduleSlice = createSlice({
     },
     getModuleFailure: loadingFailed,
     getModulesFailure: loadingFailed,
-    setActiveModule: (state, { payload }: PayloadAction<DataModule | undefined>) => {
+    setActiveModule: (state, { payload }: PayloadAction<Module | undefined>) => {
       state.module = payload;
       state.message = '';
     },
-    setActiveModules: (state, { payload }: PayloadAction<DataModule | undefined>) => {
+    setActiveModules: (state, { payload }: PayloadAction<Module | undefined>) => {
       if (payload) {
         const exists = state.activeModules.some(module => module._id === payload._id);
         if (!exists) {

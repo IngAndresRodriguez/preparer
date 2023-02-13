@@ -1,5 +1,20 @@
 import axios from 'axios';
-import { DataCreateExercise, DataExercise, DataResult, DataUpdateExercise, ExerciseResponse, ModuleResponse, PREFIXS, PatternResponse, PreparerExercise } from '../interfaces';
+import {
+  DataCreateExercise,
+  DataExercise,
+  DataPatterns,
+  DataResult,
+  DataUpdateExercise,
+  ExerciseResponse,
+  ModuleResponse,
+  PREFIXS,
+  PatternResponse,
+  Exercise,
+  Pattern,
+  DataModules,
+  Module
+} from '../interfaces';
+
 
 export const intancePreparerAPI = axios.create({
   baseURL: 'http://192.168.102.24:14480/api'
@@ -10,7 +25,7 @@ export const intancePreparerAPI = axios.create({
 export const getExercises = async () => {
 
   const { data } = await intancePreparerAPI
-    .get<ExerciseResponse<DataExercise<PreparerExercise[]>>>('/exercise');
+    .get<ExerciseResponse<DataExercise<Exercise[]>>>('/exercise');
 
   return data;
 
@@ -19,7 +34,7 @@ export const getExercises = async () => {
 export const getExercise = async (idScenario: string) => {
 
   const { data } = await intancePreparerAPI
-    .get<ExerciseResponse<DataExercise<PreparerExercise>>>(`/exercise/${idScenario}`);
+    .get<ExerciseResponse<DataExercise<Exercise>>>(`/exercise/${idScenario}`);
 
   return data;
 
@@ -48,7 +63,7 @@ export const updateExercise = async (dataExercise: DataUpdateExercise) => {
 export const getPatterns = async () => {
 
   const { data } = await intancePreparerAPI
-    .get<PatternResponse>('/pattern');
+    .get<PatternResponse<DataPatterns<Pattern[]>>>('/pattern');
 
   return data;
 
@@ -59,7 +74,7 @@ export const getPatterns = async () => {
 export const getModules = async () => {
 
   const { data } = await intancePreparerAPI
-    .get<ModuleResponse>('/module');
+    .get<ModuleResponse<DataModules<Module[]>>>('/module');
 
   return data;
 
