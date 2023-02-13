@@ -1,13 +1,14 @@
+import { MouseEvent } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import drone from '../../assets/drone.svg';
-import { Link } from 'react-router-dom';
 
 interface EmptyProps {
   title: string;
   showButton?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-export const Empty = ({ title, showButton = false }: EmptyProps) => {
+export const Empty = ({ title, showButton = false, onClick }: EmptyProps) => {
   return (
     <Grid
       container
@@ -37,9 +38,7 @@ export const Empty = ({ title, showButton = false }: EmptyProps) => {
         {
           (showButton) && (
             <Grid item sx={{ '&.MuiGrid-item': { paddingY: '10px' } }}>
-              <Link to="/new/patterns">
-                <Button variant="contained" color='default' sx={{ display: 'inline-block' }}>NUEVO</Button>
-              </Link>
+              <Button onClick={onClick} variant="contained" color='default' sx={{ display: 'inline-block' }}>NUEVO</Button>
             </Grid>
           )
         }
