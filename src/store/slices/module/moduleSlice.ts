@@ -43,16 +43,21 @@ export const moduleSlice = createSlice({
       state.module = payload;
       state.message = '';
     },
-    setActiveModules: (state, { payload }: PayloadAction<DataModule>) => {
-      const exists = state.activeModules.some(module => module._id === payload._id);
-      if (!exists) {
-        state.activeModules.push(payload);
-        state.module = payload;
+    setActiveModules: (state, { payload }: PayloadAction<DataModule | undefined>) => {
+      if (payload) {
+        const exists = state.activeModules.some(module => module._id === payload._id);
+        if (!exists) {
+          state.activeModules.push(payload);
+          state.module = payload;
+        } else {
+          state.activeModules = state.activeModules.filter(module => module._id !== payload._id)
+          state.module = undefined;
+        }
+        state.message = '';
       } else {
-        state.activeModules = state.activeModules.filter(module => module._id !== payload._id)
+        state.activeModules = [];
         state.module = undefined;
       }
-      state.message = '';
     },
     resetModule: () => initialState,
   },
