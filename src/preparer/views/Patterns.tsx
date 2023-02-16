@@ -13,8 +13,6 @@ export const Patterns = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  
-
   const handleCancel = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 

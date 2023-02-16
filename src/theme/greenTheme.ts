@@ -8,6 +8,7 @@ declare module '@mui/material/styles' {
     ready: PaletteColorOptions;
     danger: PaletteColorOptions;
     default: PaletteColorOptions;
+    editing: PaletteColorOptions;
   }
   interface Palette extends CustomPalette { }
   interface PaletteOptions extends CustomPalette { }
@@ -19,6 +20,7 @@ declare module '@mui/material/Button' {
     ready: true;
     danger: true;
     default: true;
+    editing: true;
   }
 }
 
@@ -28,6 +30,7 @@ declare module '@mui/material/Chip/Chip' {
     ready: true;
     danger: true;
     default: true;
+    editing: true;
   }
 }
 
@@ -68,6 +71,7 @@ export const greenTheme: Theme = createTheme({
     ready: createColor("#39a935"),
     danger: createColor("#DC3545"),
     default: createColor("#F8F9FA"),
+    editing: createColor("#894b50"),
     error: {
       main: red.A400,
     },

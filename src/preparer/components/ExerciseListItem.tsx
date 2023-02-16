@@ -2,6 +2,7 @@ import { ChangeEvent } from 'react';
 import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
 import Chip from '@mui/material/Chip/Chip';
 import { Exercise } from '../../interfaces';
+import { ExerciseStatus } from './ExerciseStatus';
 
 interface ExerciseListItemProps {
   exercise: Exercise;
@@ -100,7 +101,7 @@ export const ExerciseListItem = ({ exercise, handleChange }: ExerciseListItemPro
               }}
             >
               <Grid item>
-                <Chip label={status} color="ready" sx={{ borderRadius: '10px', fontSize: 'smaller', width: '100%' }} />
+                <ExerciseStatus status={status!} />
               </Grid>
             </Grid>
           </Grid>

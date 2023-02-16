@@ -1,2 +1,2 @@
-export * from './validate-states';
+export * from './validate-status';
 export * from './generics-functions';
