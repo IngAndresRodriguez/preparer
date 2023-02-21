@@ -1,4 +1,4 @@
-import { STATES } from "./generals";
+import { STATUS } from "./generals";
 
 export interface ExerciseResponse<T> {
   msg:  string;
@@ -15,7 +15,7 @@ export interface Exercise {
   scenario?:     number;
   dataLocation?: string;
   duration?:     number;
-  status?:       STATES;
+  status?:       STATUS;
   createdAt?:    string;
   updatedAt?:    string;
   pattern?:      string;

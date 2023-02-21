@@ -1,6 +1,5 @@
 import { ChangeEvent } from 'react';
 import { Checkbox, FormControlLabel, Grid, Paper, Typography, styled } from '@mui/material';
-import Chip from '@mui/material/Chip/Chip';
 import { Exercise } from '../../interfaces';
 import { ExerciseStatus } from './ExerciseStatus';
 

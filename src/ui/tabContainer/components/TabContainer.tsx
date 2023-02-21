@@ -3,6 +3,8 @@ import { Typography } from '@mui/material';
 import { Tab } from 'react-bootstrap';
 import { TabContainerContextProps, TabContainerProps } from '../interfaces';
 import { useTabContainer } from '../hooks/useTabContainer';
+// import { MyDurationInput } from '../../inputs';
+// import { Form, Formik } from 'formik';
 
 export const TabContainerContext = createContext({} as TabContainerContextProps);
 const { Provider } = TabContainerContext;
@@ -43,6 +45,34 @@ export const TabContainer = ({ children, onChange, className, style, value, init
         >
           <Tab.Pane eventKey={lastTab} title="Home" style={{ padding: '1rem' }}>
             <Typography variant='body2' component={'span'}>{lastTab.toUpperCase()}</Typography>
+
+            {/* <h1>Subscribe!</h1>
+            <Formik
+              initialValues={{
+                firstName: '',
+                lastName: '',
+                email: '',
+                acceptedTerms: false, // added for our checkbox
+                jobType: '', // added for our select
+              }}
+              // validationSchema={}  
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
+            >
+              <Form>
+                <MyDurationInput label="First Name"
+             name="firstName"
+             type="text"
+             placeholder="Jane" />
+
+                <button type="submit">Submit</button>
+              </Form>
+            </Formik> */}
+
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
